@@ -58,6 +58,7 @@ class _homepageState extends State<homepage> {
                           side: BorderSide(color:Colors.black),
                           borderRadius: BorderRadius.all(Radius.circular(12))
                       ),
+
                       // color: Colors.black,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
