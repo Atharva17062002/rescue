@@ -14,6 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int ind = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,6 +98,7 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(
                   width: 4,
                 ),
+
                 Text(
                   "${data.fname + data.lname}",
                   style: TextStyle(fontSize: 20, color: Colors.white),
@@ -141,8 +143,16 @@ class _HomePageState extends State<HomePage> {
         ),
         trailing: IconButton(
           onPressed: () {
+            // print(data.id);
+            // print(data.description);
+            // print(data.location);
+            // print(data.fname);
+            // print(data.lname);
+            // print(data.personalid);
+            // print(data.imageurl);
+
             Navigator.push(
-                context, MaterialPageRoute(builder: (contex) => FormScreen()));
+                context, MaterialPageRoute(builder: (contex) => FormScreen(personalid: data.personalid,lname: data.lname,fname: data.fname,location: data.location, imageurl: data.imageurl,description: data.description)));
           },
           icon: Icon(
             CupertinoIcons.right_chevron,
@@ -153,3 +163,4 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
