@@ -54,6 +54,10 @@ class _HomePageState extends State<HomePage> {
             child: FutureBuilder(
                 future: MongoDatabase.getData(),
                 builder: (context, AsyncSnapshot snapshot) {
+                  print("DATA");
+
+                  print(snapshot.data.toString());
+                  print("DATA ENDS HERE");
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(
                       child: CircularProgressIndicator(),
@@ -98,7 +102,6 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(
                   width: 4,
                 ),
-
                 Text(
                   "${data.fname + data.lname}",
                   style: TextStyle(fontSize: 20, color: Colors.white),
@@ -152,7 +155,15 @@ class _HomePageState extends State<HomePage> {
             // print(data.imageurl);
 
             Navigator.push(
-                context, MaterialPageRoute(builder: (contex) => FormScreen(personalid: data.personalid,lname: data.lname,fname: data.fname,location: data.location, imageurl: data.imageurl,description: data.description)));
+                context,
+                MaterialPageRoute(
+                    builder: (contex) => FormScreen(
+                        personalid: data.personalid,
+                        lname: data.lname,
+                        fname: data.fname,
+                        location: data.location,
+                        imageurl: data.imageurl,
+                        description: data.description)));
           },
           icon: Icon(
             CupertinoIcons.right_chevron,
@@ -163,4 +174,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
