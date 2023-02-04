@@ -152,7 +152,7 @@ class _HomePageState extends State<HomePage> {
             // print(data.imageurl);
 
             Navigator.push(
-                context, MaterialPageRoute(builder: (contex) => FormScreen(personalid: data.personalid,lname: data.lname,fname: data.fname,location: data.location, imageurl: data.imageurl,description: data.description)));
+                context, MaterialPageRoute(builder: (contex) => FormScreen()));
           },
           icon: Icon(
             CupertinoIcons.right_chevron,
