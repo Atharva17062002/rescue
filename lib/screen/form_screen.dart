@@ -3,24 +3,22 @@ import 'package:flutter/material.dart';
 import '../Dbmodel.dart';
 import '../dbhelper/mongodb.dart';
 
-class formscreen extends StatefulWidget {
-  const formscreen({Key? key}) : super(key: key);
+class FormScreen extends StatefulWidget {
+  const FormScreen({Key? key}) : super(key: key);
 
   @override
-  State<formscreen> createState() => _formscreenState();
+  State<FormScreen> createState() => _FormScreenState();
 }
-
-@override
-class _formscreenState extends State<formscreen> {
-  final _formkey = GlobalKey<FormState>();
+class _FormScreenState extends State<FormScreen> {
+  // final _formkey = GlobalKey<FormState>();
   final TextEditingController _name = TextEditingController();
   final TextEditingController _pid = TextEditingController();
   final TextEditingController _location = TextEditingController();
   final TextEditingController _des = TextEditingController();
-  String name = 'Soyam';
-  String pid = '014';
-  String location = 'chennai';
-  String des = 'found unconsious';
+  String name ='';
+  String pid = '';
+  String location ='';
+  String des = '' ;
 
   void initState() {
     _name.text = name;
@@ -45,11 +43,10 @@ class _formscreenState extends State<formscreen> {
                   if (snapshot.hasData) {
                     var totalData = snapshot.data.length;
                      return ListView.builder(
-                        itemCount: totalData,
+                        itemCount: 1,
                         itemBuilder: (BuildContext context, int index) {
                           return
-                          display(
-                              MongoDbModel.fromJson(snapshot.data[index]));
+                          display(MongoDbModel.fromJson(snapshot.data[index]));
                         });
                   } else {
                     return Center(
@@ -89,83 +86,52 @@ class _formscreenState extends State<formscreen> {
   }
 
   Widget display(MongoDbModel data){
-    return Stack(
+    return Column(
       children: [
-        Positioned(
-          top: 55,
-          left: 40,
-          child: Container(
-              height: MediaQuery.of(context).size.height * 0.35,
-              width: MediaQuery.of(context).size.width * 0.8,
-              child: Image.asset(
-                'assest/home.jfif',
-                width: 50,
-                height: 300,
-                fit: BoxFit.fill,
-              )),
+        Container(
+            height: MediaQuery.of(context).size.height * 0.35,
+            width: MediaQuery.of(context).size.width * 0.8,
+            child: Image.network(
+              '${data.imageurl}',
+              width: 50,
+              height: 100,
+              fit: BoxFit.fill,
+            )),
+        SizedBox(
+          height: MediaQuery.of(context).size.height*0.05,
         ),
-        Positioned(
-          left: 20,
-          bottom: 30,
-          child: Container(
-            height: MediaQuery.of(context).size.height * 0.45,
-            width: MediaQuery.of(context).size.width * 0.9,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5), color: Colors.grey),
-            child: Form(
-              key: _formkey,
-              child: new ListView(
-                children: [
-                  TextField(
-                    decoration: InputDecoration(
-                      border: UnderlineInputBorder(),
-                      prefixText: ('Person id:'),
-                    ),
-                    controller: _pid,
-                    onChanged: (String value) {
-                      name = value;
-                    },
-                  ),
 
-
-                  TextField(
-                    decoration: InputDecoration(
-                      border: UnderlineInputBorder(),
-                      prefixText: ('Name:'),
-                    ),
-                    controller: _name,
-                    onChanged: (String value) {
-                      name = value;
-                      print('hiii');
-                    },
-                  ),
-                  TextField(
-                    decoration: InputDecoration(
-                      border: UnderlineInputBorder(),
-                      prefixText: ('Location:'),
-                    ),
-                    controller: _location,
-                    onChanged: (String value) {
-                      name = value;
-                    },
-                  ),
-                  TextField(
-                    decoration: InputDecoration(
-                      border: UnderlineInputBorder(),
-                      prefixText: ('Description:'),
-                    ),
-                    controller: _des,
-                    onChanged: (String value) {
-                      name = value;
-                    },
-                  ),
-
-                ],
-              ),
-            ),
+        Container(
+          height: MediaQuery.of(context).size.height * 0.45,
+          width: MediaQuery.of(context).size.width * 0.9,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5), color: Colors.grey),
+          child: Column(
+            children: [
+              buildTextField('Personal ID : ', '${data.personalid}'),
+              buildTextField('Full Name : ', '${data.fname + data.lname}'),
+              buildTextField('Location : ', '${data.location}'),
+              buildTextField('Description : ', '${data.description}'),
+            ],
           ),
         )
       ],
     );
   }
+  Widget buildTextField(String labelText, String info) {
+    return Padding(
+      padding: EdgeInsets.only (bottom: 30),
+      child: TextField(
+        decoration: InputDecoration (
+          contentPadding: EdgeInsets.only(bottom: 5),
+          labelText: labelText,
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+          hintText: info,
+          hintStyle: TextStyle(),
+        ),
+      ),
+    );
+  }
 }
+
+

@@ -6,14 +6,14 @@ import 'package:rescue/dbhelper/mongodb.dart';
 import '../Dbmodel.dart';
 import 'form_screen.dart';
 
-class homepage extends StatefulWidget {
-  const homepage({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<homepage> createState() => _homepageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _homepageState extends State<homepage> {
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,7 +118,7 @@ class _homepageState extends State<homepage> {
                   width: 2,
                 ),
                 Text(
-                  "$data.location",
+                  "${data.location}",
                   style: TextStyle(fontSize: 17, color: Colors.white),
                 ),
               ],
@@ -132,7 +132,7 @@ class _homepageState extends State<homepage> {
                   width: 4,
                 ),
                 Text(
-                  "$data.description",
+                  "${data.description}",
                   style: TextStyle(fontSize: 18, color: Colors.white),
                 ),
               ],
@@ -142,7 +142,7 @@ class _homepageState extends State<homepage> {
         trailing: IconButton(
           onPressed: () {
             Navigator.push(
-                context, MaterialPageRoute(builder: (contex) => formscreen()));
+                context, MaterialPageRoute(builder: (contex) => FormScreen()));
           },
           icon: Icon(
             CupertinoIcons.right_chevron,
