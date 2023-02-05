@@ -47,38 +47,45 @@ class _FormScreenState extends State<FormScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: SingleChildScrollView(
           child: Column(
         children: [
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.05,
           ),
-          Container(
-              height: MediaQuery.of(context).size.height * 0.35,
-              width: MediaQuery.of(context).size.width * 0.8,
-              child: Image.network(
-                widget.imageurl,
-                width: 50,
-                height: 100,
-                fit: BoxFit.fill,
-              )),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.05,
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                image: DecorationImage(
+                  image: NetworkImage(widget.imageurl),
+                  fit: BoxFit.fill,
+                ),
+              ),
+                height: MediaQuery.of(context).size.height * 0.35,
+                // width: MediaQuery.of(context).size.width * 0.8,
+                ),
           ),
-          Container(
-            height: MediaQuery.of(context).size.height * 0.45,
-            width: MediaQuery.of(context).size.width * 0.9,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5), color: Colors.grey),
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                children: [
-                  buildTextField('Personal ID : ', widget.personalid),
-                  buildTextField('Full Name : ', widget.fname),
-                  buildTextField('Location : ', widget.location),
-                  buildTextField('Description : ', widget.description),
-                ],
+         
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.45,
+              
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5), color: Colors.grey),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    buildTextField('Personal ID : ', widget.personalid),
+                    buildTextField('First Name : ', widget.fname),
+                    buildTextField('Last Name : ', widget.lname),
+                    buildTextField('Location : ', widget.location),
+                    buildTextField('Description : ', widget.description),
+                  ],
+                ),
               ),
             ),
           )
@@ -117,7 +124,7 @@ class _FormScreenState extends State<FormScreen> {
   // }
   Widget buildTextField(String labelText, String info) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 30),
+      padding: EdgeInsets.only(bottom: 25),
       child: TextField(
         onSubmitted: (text) {
           MongoDatabase.setData(widget.personalid, text);
