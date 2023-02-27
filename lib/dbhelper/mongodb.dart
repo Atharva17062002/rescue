@@ -17,15 +17,17 @@ class MongoDatabase {
     return arrData;
   }
 
-  static void setData(String personalid, String fname) async {
-    var res = await userCollection.updateOne(where.eq('personalid', personalid),
-        ModifierBuilder().set('fname', fname),
+  static void setData(String objectId, String attribute, String value) async {
+    var res = await userCollection.updateOne(
+        where.eq('_id', ObjectId.fromHexString(objectId)),
+        ModifierBuilder().set(attribute, value),
         writeConcern: WriteConcern(w: 'majority', wtimeout: 5000));
 
     print('Modified documents: ${res.nModified}'); // 1
 
-    var findResult =
-        await userCollection.find(where.eq('personalid', personalid)).toList();
+    var findResult = await userCollection
+        .find(where.eq('_id', ObjectId.fromHexString(objectId)))
+        .toList();
 
     print('Modified element status: '
         '"${findResult.first['status']}"'); // 'A';
