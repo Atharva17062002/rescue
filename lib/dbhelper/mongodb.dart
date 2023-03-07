@@ -32,4 +32,20 @@ class MongoDatabase {
     print('Modified element status: '
         '"${findResult.first['status']}"'); // 'A';
   }
+
+  static void unassignProfile(String objectId) async {
+    var res = await userCollection.updateOne(
+        where.eq('_id', ObjectId.fromHexString(objectId)),
+        ModifierBuilder().set('assignedStatus', false),
+        writeConcern: WriteConcern(w: 'majority', wtimeout: 5000));
+
+    print('Modified documents: ${res.nModified}'); // 1
+
+    var findResult = await userCollection
+        .find(where.eq('_id', ObjectId.fromHexString(objectId)))
+        .toList();
+
+    print('Profile unassigned status: '
+        '"${findResult.first['status']}"'); // 'A';
+  }
 }
