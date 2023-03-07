@@ -189,7 +189,10 @@ class _HomePageState extends State<HomePage> {
                     ElevatedButton(
                       style:
                           ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                      onPressed: () {},
+                      onPressed: () {
+                        MongoDatabase.unassignProfile(data.id.toHexString());
+                        setState(() {});
+                      },
                       child: Icon(Icons.close),
                     )
                   ],
