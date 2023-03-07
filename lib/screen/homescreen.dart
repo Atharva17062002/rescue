@@ -84,101 +84,235 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget displayCard(MongoDbModel data) {
-    if (data.assignedStatus == true)
-      return Card(
-        color: Color(0xff1B1C1E),
-        child: ListTile(
-          contentPadding: EdgeInsets.all(4),
-          leading: CircleAvatar(
-            backgroundColor: Colors.yellow,
-            radius: 25,
-            child: Icon(
-              Icons.person,
-              color: Colors.black,
-            ),
-          ),
-          title: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  SizedBox(
-                    width: 4,
+    if (data.assignedStatus == true) {
+      return Container(
+        height: 120,
+        child: Card(
+            color: Color(0xff1B1C1E),
+            child: Row(
+              children: [
+                SizedBox(
+                  width: 15,
+                ),
+                CircleAvatar(
+                  backgroundColor: Colors.yellow,
+                  radius: 25,
+                  child: Icon(
+                    Icons.person,
+                    color: Colors.black,
                   ),
-                  Text(
-                    "${data.fname + data.lname}",
-                    style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Icon(
-                    Ionicons.location,
-                    color: Colors.white,
-                    size: 20,
-                  ),
-                  SizedBox(
-                    width: 2,
-                  ),
-                  Text(
-                    "${data.location}",
-                    style: TextStyle(fontSize: 17, color: Colors.white),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 4,
-                  ),
-                  Text(
-                    "${data.description}",
-                    style: TextStyle(fontSize: 18, color: Colors.white),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          trailing: IconButton(
-            onPressed: () {
-              // print(data.id);
-              // print(data.description);
-              // print(data.location);
-              // print(data.fname);
-              // print(data.lname);
-              // print(data.personalid);
-              // print(data.imageurl);
-
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (contex) => FormScreen(
-                          id: data.id.toHexString(),
-                          personalid: data.personalid,
-                          lname: data.lname,
-                          fname: data.fname,
-                          location: data.location,
-                          imageurl: data.imageurl,
-                          description: data.description)));
-            },
-            icon: Icon(
-              CupertinoIcons.right_chevron,
-              color: Colors.white,
-            ),
-          ),
-        ),
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 4,
+                        ),
+                        Text(
+                          "${data.fname + data.lname}",
+                          style: TextStyle(fontSize: 20, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Icon(
+                          Ionicons.location,
+                          color: Colors.white,
+                          size: 20,
+                        ),
+                        SizedBox(
+                          width: 2,
+                        ),
+                        Text(
+                          "${data.location}",
+                          style: TextStyle(fontSize: 17, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 4,
+                        ),
+                        Text(
+                          "${data.description}",
+                          style: TextStyle(fontSize: 18, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                Spacer(),
+                Column(
+                  children: [
+                    SizedBox(
+                      height: 10,
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green,
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (contex) => FormScreen(
+                                id: data.id.toHexString(),
+                                personalid: data.personalid,
+                                lname: data.lname,
+                                fname: data.fname,
+                                location: data.location,
+                                imageurl: data.imageurl,
+                                description: data.description),
+                          ),
+                        );
+                      },
+                      child: Icon(Icons.check),
+                    ),
+                    ElevatedButton(
+                      style:
+                          ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                      onPressed: () {},
+                      child: Icon(Icons.close),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  width: 10,
+                )
+              ],
+            )),
       );
+    }
     return SizedBox(
       height: 1,
     );
   }
 }
+
+// IconButton(
+// onPressed: () {
+// // print(data.id);
+// // print(data.description);
+// // print(data.location);
+// // print(data.fname);
+// // print(data.lname);
+// // print(data.personalid);
+// // print(data.imageurl);
+//
+// Navigator.push(
+// context,
+// MaterialPageRoute(
+// builder: (contex) => FormScreen(
+// id: data.id.toHexString(),
+// personalid: data.personalid,
+// lname: data.lname,
+// fname: data.fname,
+// location: data.location,
+// imageurl: data.imageurl,
+// description: data.description)));
+// },
+// icon: Icon(
+// CupertinoIcons.right_chevron,
+// color: Colors.white,
+// ),
+// ),
+//
+// ListTile(
+// contentPadding: EdgeInsets.all(4),
+// leading: CircleAvatar(
+// backgroundColor: Colors.yellow,
+// radius: 25,
+// child: Icon(
+// Icons.person,
+// color: Colors.black,
+// ),
+// ),
+// title: Column(
+// mainAxisAlignment: MainAxisAlignment.start,
+// crossAxisAlignment: CrossAxisAlignment.start,
+// children: [
+// Row(
+// children: [
+// SizedBox(
+// width: 4,
+// ),
+// Text(
+// "${data.fname + data.lname}",
+// style: TextStyle(fontSize: 20, color: Colors.white),
+// ),
+// ],
+// ),
+// SizedBox(
+// height: 5,
+// ),
+// Row(
+// mainAxisAlignment: MainAxisAlignment.start,
+// children: <Widget>[
+// Icon(
+// Ionicons.location,
+// color: Colors.white,
+// size: 20,
+// ),
+// SizedBox(
+// width: 2,
+// ),
+// Text(
+// "${data.location}",
+// style: TextStyle(fontSize: 17, color: Colors.white),
+// ),
+// ],
+// ),
+// SizedBox(
+// height: 5,
+// ),
+// Row(
+// children: [
+// SizedBox(
+// width: 4,
+// ),
+// Text(
+// "${data.description}",
+// style: TextStyle(fontSize: 18, color: Colors.white),
+// ),
+// ],
+// ),
+// ],
+// ),
+// trailing: Column(
+// children: [
+// ElevatedButton(
+// style: ElevatedButton.styleFrom(
+//
+// backgroundColor: Colors.green,
+//
+// ),
+// onPressed: () {},
+// child: Icon(Icons.check),
+// ),
+// ElevatedButton(
+// style: ElevatedButton.styleFrom(
+// backgroundColor: Colors.red
+// ),
+// onPressed: () {},
+// child: Icon(Icons.close),
+// )
+// ],
+// )),

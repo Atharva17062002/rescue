@@ -86,14 +86,16 @@ class _FormScreenState extends State<FormScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
                       children: [
-                        buildTextField(
-                            'Personal ID : ', "personalid", widget.personalid),
+                        // buildTextField(
+                        //     'Personal ID : ', "personalid", widget.personalid),
                         buildTextField('First Name : ', "fname", widget.fname),
                         buildTextField('Last Name : ', "lname", widget.lname),
+                        // buildTextField('Date', "", info)
                         buildTextField(
                             'Location : ', "location", widget.location),
                         buildTextField('Description : ', "description",
                             widget.description),
+
                       ],
                     ),
                   ),
